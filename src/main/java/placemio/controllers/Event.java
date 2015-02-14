@@ -3,6 +3,7 @@ package placemio.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import placemio.AuthRequired;
 import placemio.LoginRequired;
 import placemio.models.EventModel;
 import placemio.services.AuthMe;
@@ -14,14 +15,16 @@ import java.util.List;
 
 
 @RestController
+
 public class Event {
 
     @Autowired
     EventService eventService;
 
     @RequestMapping(value="api/v1/event", method=RequestMethod.POST, headers = {"Content-type=application/json"})
-    @LoginRequired
     @ResponseBody
+    @AuthRequired
+    @LoginRequired
     public EventModel createLocation(
             @RequestBody EventModel eventModel,
             HttpServletRequest request,
@@ -33,8 +36,8 @@ public class Event {
     }
 
     @RequestMapping(value = "api/v1/event", method= RequestMethod.GET)
+    @AuthRequired
     @LoginRequired
-    @AuthMe
     public List<EventModel> getEvents() {
         return eventService.retrieveEvents();
     }

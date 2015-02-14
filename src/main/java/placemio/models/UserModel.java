@@ -6,7 +6,7 @@ public class UserModel {
     private String username;
     private String password;
     private String userId;
-    private String apiToken;
+    private String apiKey;
     private String apiSecret;
 
     public String getUsername() {
@@ -33,12 +33,12 @@ public class UserModel {
         this.userId = userId;
     }
 
-    public void setApiToken(String apiToken){
-        this.apiToken = apiToken;
+    public void setApiKey(String apiKey){
+        this.apiKey = apiKey;
     }
 
-    public String getApiToken(){
-        return apiToken;
+    public String getApiKey(){
+        return apiKey;
     }
 
     public void setApiSecret(String apiSecret){

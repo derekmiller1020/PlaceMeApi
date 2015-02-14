@@ -11,35 +11,48 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
+    private HandlerMethod handlerMethod;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        handlerMethod = (HandlerMethod) handler;
         LoginRequired loginRequired = handlerMethod.getMethod().getAnnotation(LoginRequired.class);
-        if (loginRequired == null || !loginRequired.required()) {
-            return true;
-        }
+        AuthRequired authRequired = handlerMethod.getMethod().getAnnotation(AuthRequired.class);
 
-        String token = httpServletRequest.getHeader("Authorization");
+        Boolean validUserCredentials = checkUserCredentials(loginRequired, httpServletRequest);
+        Boolean validAuthCredentials = checkAuthCredentials(authRequired, httpServletRequest);
 
-        String cookieToken = "";
-        for (Cookie cookie : httpServletRequest.getCookies()){
-            if (cookie != null && cookie.getName().equals("token")){
-                if (new Authenticator().checkToken(cookie.getValue())){
-                    cookieToken = cookie.getValue();
-                }
-            }
-        }
-
-        if ((token == null || token.equals("")) && cookieToken.equals("")) {
-            httpServletResponse.sendError(400, "Put that token in there!");
-            return true;
-        }
-
-        if (!new Authenticator().checkToken(token) && cookieToken.equals("")){
-            httpServletResponse.sendError(400, "That token isn't correct!");
-            return true;
+        if (!validAuthCredentials){
+            httpServletResponse.sendError(400, "You are not authorized!");
+        } else if (!validUserCredentials){
+            httpServletResponse.sendError(400, "You are not logged in!");
         }
 
         return super.preHandle(httpServletRequest, httpServletResponse, handler);
+    }
+
+    private boolean checkUserCredentials(LoginRequired loginRequired, HttpServletRequest httpServletRequest) throws Exception{
+        if (loginRequired == null || !loginRequired.required()) {
+            return true;
+        } else {
+            String cookieToken = "";
+            for (Cookie cookie : httpServletRequest.getCookies()){
+                if (cookie != null && cookie.getName().equals("token")){
+                    if (new Authenticator().checkToken(cookie.getValue())){
+                        cookieToken = cookie.getValue();
+                    }
+                }
+            }
+            return cookieToken != null && !cookieToken.equals("");
+        }
+    }
+
+    private boolean checkAuthCredentials(AuthRequired authRequired, HttpServletRequest httpServletRequest) throws Exception{
+        if (authRequired == null || !authRequired.required()){
+            return true;
+        } else {
+            String token = httpServletRequest.getHeader("Authorization");
+            return !(token == null || token.equals("")) && new Authenticator().checkToken(token);
+        }
     }
 }

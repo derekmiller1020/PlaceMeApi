@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import placemio.models.UserModel;
 import placemio.models.insertion.InsertApiUser;
 import placemio.models.insertion.InsertUser;
+import placemio.models.validation.ValidateAuth;
 import placemio.models.validation.ValidateRegistration;
 import placemio.models.validation.ValidateUser;
 import placemio.token.Authenticator;
@@ -32,13 +33,13 @@ public class UserService {
         return user;
     }
 
-    public Map<String, String> authRegistration(HttpServletResponse response) throws Exception{
-        Map<String, String> registerResponse = new HashMap<String, String>();
+    public Map<String, Object> authRegistration(HttpServletResponse response) throws Exception{
+        Map<String, Object> registerResponse = new HashMap<String, Object>();
         if (validateUser.validCredentials(user.getUsername(), user.getPassword())) {
             try {
                 InsertApiUser insertApiUser = new InsertApiUser(validateUser.getUserId());
                 insertApiUser.insert();
-                registerResponse.put("Success", "");
+                registerResponse.putAll(insertApiUser.getCredentials());
             } catch (Exception e) {
                 response.sendError(400, "There was an unexpected error");
             }
@@ -46,6 +47,19 @@ public class UserService {
             response.sendError(400, "Credentials were not correct");
         }
         return registerResponse;
+    }
+
+    public Map<String, String> authLogin(HttpServletResponse response) throws Exception {
+        Map<String, String> authResponse = new HashMap<String, String>();
+        ValidateAuth validateAuth = new ValidateAuth();
+        if (validateAuth.validCredentials(user.getApiKey(), user.getApiSecret())){
+            validateAuth.setToken(user.getApiKey());
+            authResponse.put("token", validateAuth.getToken());
+        } else {
+            response.sendError(400, "You did not send over valid credentials");
+        }
+
+        return authResponse;
     }
 
     public Map<String, String> register(HttpServletResponse response) throws Exception{

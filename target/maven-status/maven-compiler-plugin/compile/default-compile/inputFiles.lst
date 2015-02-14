@@ -16,12 +16,12 @@
 /Users/derek.miller/placemio/src/main/java/placemio/models/EventModel.java
 /Users/derek.miller/placemio/src/main/java/placemio/DatabaseConnection.java
 /Users/derek.miller/placemio/src/main/java/placemio/WebApplicationConfig.java
+/Users/derek.miller/placemio/src/main/java/placemio/AuthRequired.java
 /Users/derek.miller/placemio/src/main/java/placemio/services/AuthMe.java
 /Users/derek.miller/placemio/src/main/java/placemio/services/EventAspect.java
 /Users/derek.miller/placemio/src/main/java/placemio/AspectConfig.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/validation/ValidateEvent.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/validation/ValidateAuth.java
-/Users/derek.miller/placemio/src/main/java/placemio/models/AuthLoginModel.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/insertion/InsertApiUser.java
 /Users/derek.miller/placemio/src/main/java/placemio/services/UserService.java
 /Users/derek.miller/placemio/src/main/java/placemio/AuthenticationInterceptor.java

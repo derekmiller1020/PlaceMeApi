@@ -3,7 +3,6 @@ placemio/CreateDatabase.class
 placemio/models/retrieve/RetrieveEvent$1.class
 placemio/models/retrieve/RetrieveEvent.class
 placemio/LoginRequired.class
-placemio/models/AuthLoginModel.class
 placemio/AspectConfig.class
 placemio/token/Authenticator.class
 placemio/AuthenticationInterceptor.class
@@ -16,6 +15,7 @@ placemio/services/AuthMe.class
 placemio/models/submodels/EventContent.class
 placemio/models/EventModel.class
 placemio/models/submodels/Address.class
+placemio/AuthRequired.class
 placemio/services/EventAspect.class
 placemio/models/validation/ValidateEvent$1.class
 placemio/models/retrieve/RetrieveEvent$2.class

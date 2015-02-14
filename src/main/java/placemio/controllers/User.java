@@ -31,15 +31,15 @@ public class User {
     }
 
     @RequestMapping(value = "api/v1/auth/register")
-    public Map<String, String> registerApi(@RequestBody UserModel user, HttpServletResponse response) throws Throwable{
+    public Map<String, Object> registerApi(@RequestBody UserModel user, HttpServletResponse response) throws Throwable{
         userService.setUser(user);
         return userService.authRegistration(response);
     }
 
     @RequestMapping(value = "api/v1/auth/login")
-    public String loginApi(@RequestBody UserModel user, HttpServletResponse response){
+    public Map<String, String> loginApi(@RequestBody UserModel user, HttpServletResponse response) throws Throwable{
         userService.setUser(user);
-        return "";
+        return userService.authLogin(response);
     }
 
 }

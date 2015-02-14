@@ -38,9 +38,8 @@ public class InsertApiUser {
         return api.size() < 1;
     }
 
-    public List<Map<String, Object>> getCredentials(){
+    public Map<String, Object> getCredentials(){
         String sql = "SELECT api_key, api_secret FROM user_api where user_id = ?";
-        List<Map<String, Object>> credentials = db.queryForList(sql, new Integer[]{userId});
-        return credentials;
+        return db.queryForMap(sql, new Integer[]{userId});
     }
 }

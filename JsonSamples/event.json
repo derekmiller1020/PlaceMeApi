@@ -1,0 +1,13 @@
+{
+  "address": {
+    "street_address": "5645 Ralston Ave",
+    "city": "Indianapolis",
+    "state": "Indiana",
+    "zip_code": 46220
+  },
+  "eventContent": {
+    "message": "This is a really cool house party",
+    "type": "Party",
+    "title": "SwEeT HoUsE PaR-T"
+  }
+}

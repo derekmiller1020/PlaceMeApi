@@ -10,6 +10,7 @@ import placemio.models.submodels.Address;
 import placemio.models.validation.ValidateEvent;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Aspect
@@ -18,10 +19,11 @@ public class EventAspect {
 
     @Autowired
     private EventService eventService;
-    private ValidateEvent validateEvent = new ValidateEvent();
 
-    @Around("execution(* placemio.services.EventService.create(..))")
+    @Around("@annotation(placemio.services.EventValidation)")
     public void validate(ProceedingJoinPoint joinPoint) throws Throwable{
+        HttpServletResponse response = (HttpServletResponse)joinPoint.getArgs()[1];
+        ValidateEvent validateEvent = new ValidateEvent();
         Address address = eventService.getEvent().getAddress();
         //validates address fields
         validateEvent.validateAddress(address);
@@ -35,9 +37,7 @@ public class EventAspect {
         validateEvent.validateEventContent(eventService.getEvent().getEventContent());
 
         if (validateEvent.getErrorMessages().size() > 0){
-            for (String error: validateEvent.getErrorMessages()){
-                eventService.addError(error);
-            }
+            response.sendError(400, validateEvent.getErrorMessages().get(0));
         }
         joinPoint.proceed();
     }

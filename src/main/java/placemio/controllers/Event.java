@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import placemio.AuthRequired;
 import placemio.LoginRequired;
 import placemio.models.EventModel;
-import placemio.services.AuthMe;
 import placemio.services.EventService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,24 +20,70 @@ public class Event {
     @Autowired
     EventService eventService;
 
+
+    /**
+     * Creates Event
+     * @param eventModel data coming in should match event Model
+     * @param request http request
+     * @param response response, typically used for errors
+     * @return EventModel returns an event model to json
+     * @throws Throwable
+     */
     @RequestMapping(value="api/v1/event", method=RequestMethod.POST, headers = {"Content-type=application/json"})
     @ResponseBody
     @AuthRequired
     @LoginRequired
-    public EventModel createLocation(
+    public EventModel createEvent(
             @RequestBody EventModel eventModel,
             HttpServletRequest request,
             HttpServletResponse response
     ) throws Throwable {
         eventService.setEvent(eventModel);
-        eventService.create(request, response);
+        eventService.create(request.getCookies(), response);
         return eventService.getEvent();
     }
 
+    /**
+     * Gets all of the events
+     * @return EventModel
+     */
     @RequestMapping(value = "api/v1/event", method= RequestMethod.GET)
     @AuthRequired
     @LoginRequired
     public List<EventModel> getEvents() {
         return eventService.retrieveEvents();
     }
+
+    /**
+     * gets one event
+     * @param eventId event id that is specified on endpoint
+     * @return EventModel
+     */
+    @RequestMapping(value = "api/v1/event/{eventId}", method=RequestMethod.GET)
+    @AuthRequired
+    @LoginRequired
+    public EventModel getEvent(@PathVariable Integer eventId){
+        return eventService.retrieveEvent(eventId);
+    }
+
+    /**
+     * updates one event
+     * @param eventId
+     * @param eventModel
+     * @param response
+     * @return EventModel
+     * @throws Throwable
+     */
+    @RequestMapping(value = "api/v1/event/{eventId}", method=RequestMethod.PUT)
+    @ResponseBody
+    @AuthRequired
+    @LoginRequired
+    public EventModel updateEvent(@PathVariable Integer eventId,
+                                  @RequestBody EventModel eventModel,
+                                  HttpServletResponse response) throws Throwable{
+        eventService.setEvent(eventModel);
+        eventService.updateEvent(eventId, response);
+        return eventService.retrieveEvent(eventId);
+    }
+
 }

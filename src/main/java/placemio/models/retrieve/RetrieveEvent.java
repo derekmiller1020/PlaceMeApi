@@ -65,8 +65,8 @@ public class RetrieveEvent {
     private EventModel retrieveEvent(Integer eventId){
         results = db.query(
                 "SELECT * from event e " +
-                        "INNER JOIN event_address ea ON ea.location_id = e.id " +
-                        "INNER JOIN event_content ec ON ec.location_id = ea.location_id " +
+                        "INNER JOIN event_address ea ON ea.event_id = e.id " +
+                        "INNER JOIN event_content ec ON ec.event_id = ea.event_id " +
                         "WHERE e.id = ?",
                 new Object[]{eventId},
                 new RowMapper<EventModel>() {
@@ -105,7 +105,7 @@ public class RetrieveEvent {
                         return eventModel;
                     }
                 });
-        return results.get(0);
+        return results.isEmpty() ? null : results.get(0);
     }
 
     public List<EventModel> getEvents(){

@@ -7,9 +7,9 @@
 /Users/derek.miller/placemio/src/main/java/placemio/token/Authenticator.java
 /Users/derek.miller/placemio/src/main/java/placemio/controllers/User.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/insertion/InsertUser.java
-/Users/derek.miller/placemio/src/main/java/placemio/services/UserAspect.java
 /Users/derek.miller/placemio/src/main/java/placemio/services/EventService.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/retrieve/RetrieveEvent.java
+/Users/derek.miller/placemio/src/main/java/placemio/services/EventValidation.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/insertion/InsertEvent.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/submodels/EventContent.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/validation/ValidateUser.java
@@ -17,11 +17,11 @@
 /Users/derek.miller/placemio/src/main/java/placemio/DatabaseConnection.java
 /Users/derek.miller/placemio/src/main/java/placemio/WebApplicationConfig.java
 /Users/derek.miller/placemio/src/main/java/placemio/AuthRequired.java
-/Users/derek.miller/placemio/src/main/java/placemio/services/AuthMe.java
 /Users/derek.miller/placemio/src/main/java/placemio/services/EventAspect.java
 /Users/derek.miller/placemio/src/main/java/placemio/AspectConfig.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/validation/ValidateEvent.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/validation/ValidateAuth.java
+/Users/derek.miller/placemio/src/main/java/placemio/models/update/UpdateEvent.java
 /Users/derek.miller/placemio/src/main/java/placemio/models/insertion/InsertApiUser.java
 /Users/derek.miller/placemio/src/main/java/placemio/services/UserService.java
 /Users/derek.miller/placemio/src/main/java/placemio/AuthenticationInterceptor.java

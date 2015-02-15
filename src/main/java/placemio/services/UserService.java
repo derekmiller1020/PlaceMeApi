@@ -76,8 +76,8 @@ public class UserService {
         return statusResponse;
     }
 
-    public void setUserFromRequest(HttpServletRequest request){
-        user.setUserId(getUserFromCookie(request.getCookies()));
+    public void setUserFromRequest(Cookie[] cookies){
+        user.setUserId(getUserFromCookie(cookies));
     }
 
     public String getUserFromCookie(Cookie[] users){

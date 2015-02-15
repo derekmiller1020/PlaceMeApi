@@ -4,8 +4,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 public class CreateDatabase {
-
     /*
+
     public static void main(String args[]) {
 
         // simple DS for test (not for production!)
@@ -32,7 +32,7 @@ public class CreateDatabase {
                 "unique_id varchar(255), PRIMARY KEY (id))");
 
         jdbcTemplate.execute("create table user_token(" +
-                "id int(11) NOT NULL AUTO_INCREMENT, username varchar(255), token varchar(255), expire_date DATE, " +
+                "id int(11) NOT NULL AUTO_INCREMENT, username varchar(255), token varchar(255), expire_date TIMESTAMP, " +
                 "user_id varchar(255), api_id varchar(255), PRIMARY KEY (id))");
 
         jdbcTemplate.execute("create table user_api(" +
@@ -40,7 +40,7 @@ public class CreateDatabase {
                 "user_id varchar(255), PRIMARY KEY (id))");
 
         jdbcTemplate.execute("create table event(" +
-                "id int(11) NOT NULL AUTO_INCREMENT, user_id int(11), creation_date DATE, event_date DATE, " +
+                "id int(11) NOT NULL AUTO_INCREMENT, user_id int(11), creation_date TIMESTAMP, event_date TIMESTAMP, " +
                 "is_deleted int(2) DEFAULT 0, PRIMARY KEY(id))");
 
 
@@ -57,4 +57,5 @@ public class CreateDatabase {
 
     }
 */
+
 }

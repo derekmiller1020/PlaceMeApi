@@ -25,28 +25,6 @@ public class ValidateEvent {
     private Authenticator authenticator = new Authenticator();
     private String userId = "";
 
-    public void validateUser(Cookie[] users){
-        if (users == null){
-            errorMessages.add("There was no user information added");
-        } else {
-            try {
-                for (Cookie user: users){
-                    if (user.getName().equals("token")){
-                        System.out.println(user.getValue());
-                        if (authenticator.checkToken(user.getValue())){
-                            userId = authenticator.getTokenUserId();
-                        };
-                    }
-                }
-                if (userId.equals("")){
-                    errorMessages.add("You do not have a valid token");
-                }
-            } catch (Exception e){
-                errorMessages.add(e.toString());
-            }
-        }
-    }
-
     public void validateAddress(Address address){
         if (address == null){
             errorMessages.add("There was no address information provided");

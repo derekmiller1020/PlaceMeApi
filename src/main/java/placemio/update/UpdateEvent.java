@@ -1,8 +1,7 @@
-package placemio.models.update;
+package placemio.update;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import placemio.DatabaseConnection;
-import placemio.models.UserModel;
 import placemio.models.submodels.Address;
 import placemio.models.submodels.EventContent;
 

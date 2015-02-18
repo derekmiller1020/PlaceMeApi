@@ -2,15 +2,14 @@ package placemio.services;
 
 import org.springframework.stereotype.Component;
 import placemio.models.UserModel;
-import placemio.models.insertion.InsertApiUser;
-import placemio.models.insertion.InsertUser;
+import placemio.insertion.InsertApiUser;
+import placemio.insertion.InsertUser;
 import placemio.models.validation.ValidateAuth;
 import placemio.models.validation.ValidateRegistration;
 import placemio.models.validation.ValidateUser;
 import placemio.token.Authenticator;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;

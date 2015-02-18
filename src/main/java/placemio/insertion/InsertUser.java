@@ -1,4 +1,4 @@
-package placemio.models.insertion;
+package placemio.insertion;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;

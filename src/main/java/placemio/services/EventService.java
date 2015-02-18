@@ -4,14 +4,12 @@ package placemio.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import placemio.models.EventModel;
-import placemio.models.insertion.InsertEvent;
-import placemio.models.retrieve.RetrieveEvent;
-import placemio.models.update.UpdateEvent;
+import placemio.insertion.InsertEvent;
+import placemio.retrieve.RetrieveEvent;
+import placemio.update.UpdateEvent;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

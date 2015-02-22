@@ -32,7 +32,7 @@ public class RetrieveEvent {
                 "SELECT * from event e " +
                         "INNER JOIN event_address ea ON ea.event_id = e.id " +
                         "INNER JOIN event_content ec ON ec.event_id = ea.event_id " +
-                        "WHERE ec.type = ?",
+                        "WHERE ec.type = ? AND is_deleted != 1",
                 new Object[]{type},
                 new RowMapper<EventModel>() {
                     @Override
@@ -47,7 +47,8 @@ public class RetrieveEvent {
         results = db.query(
                 "SELECT * from event e " +
                         "INNER JOIN event_address ea ON ea.event_id = e.id " +
-                        "INNER JOIN event_content ec ON ec.event_id = ea.event_id ",
+                        "INNER JOIN event_content ec ON ec.event_id = ea.event_id " +
+                        "WHERE is_deleted != 1",
                 new RowMapper<EventModel>() {
                     @Override
                     public EventModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -62,7 +63,7 @@ public class RetrieveEvent {
                 "SELECT * from event e " +
                         "INNER JOIN event_address ea ON ea.event_id = e.id " +
                         "INNER JOIN event_content ec ON ec.event_id = ea.event_id " +
-                        "WHERE e.id = ?",
+                        "WHERE e.id = ? AND e.is_deleted != 1",
                 new Object[]{eventId},
                 new RowMapper<EventModel>() {
                     @Override
@@ -79,7 +80,6 @@ public class RetrieveEvent {
         Map<String, Object> eventDetails = new HashMap<String, Object>();
         eventDetails.put("user_id", rs.getInt("USER_ID"));
         eventDetails.put("creation_date", rs.getDate("CREATION_DATE"));
-        eventDetails.put("event_date", rs.getDate("EVENT_DATE"));
         eventDetails.put("event_id", rs.getInt("ID"));
         eventModel.setEventDetails(eventDetails);
 
@@ -101,6 +101,8 @@ public class RetrieveEvent {
         eventContent.setTitle(rs.getString("TITLE"));
         eventContent.setType(rs.getString("TYPE"));
         eventContent.setAgeGroup(rs.getString("AGE_GROUP"));
+        eventContent.setDate(rs.getDate("EVENT_DATE"));
+        eventContent.setTime(rs.getTime("EVENT_DATE"));
         eventModel.setEventContent(eventContent);
 
         return eventModel;

@@ -44,12 +44,11 @@ public class Event {
     }
 
     /**
-     * Gets all of the events
+     * Gets all of the events - login not required but auth is
      * @return EventModel
      */
     @RequestMapping(value = "api/v1/event", method= RequestMethod.GET)
     @AuthRequired
-    @LoginRequired
     public List<EventModel> getEvents() {
         return eventService.retrieveEvents();
     }
@@ -61,7 +60,6 @@ public class Event {
      */
     @RequestMapping(value = "api/v1/event/{eventId}", method=RequestMethod.GET)
     @AuthRequired
-    @LoginRequired
     public EventModel getEvent(@PathVariable Integer eventId){
         return eventService.retrieveEvent(eventId);
     }
@@ -84,6 +82,15 @@ public class Event {
         eventService.setEvent(eventModel);
         eventService.updateEvent(eventId, response);
         return eventService.retrieveEvent(eventId);
+    }
+
+    @RequestMapping(value = "api/v1/event/{eventId}", method=RequestMethod.DELETE)
+    @ResponseBody
+    @AuthRequired
+    @LoginRequired
+    public EventModel deleteEvent(@PathVariable Integer eventId, HttpServletResponse response, HttpServletRequest request) throws Throwable {
+        eventService.deleteEvent(eventId, response);
+        return null; //temporary
     }
 
 }

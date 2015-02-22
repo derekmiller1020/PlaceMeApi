@@ -1,12 +1,16 @@
 package placemio.models.submodels;
 
 
+import java.util.Date;
+
 public class EventContent {
 
     private String message;
     private String type;
     private String title;
     private String ageGroup;
+    private Date time;
+    private Date date;
 
     public String getAgeGroup() {
         return ageGroup;
@@ -38,6 +42,22 @@ public class EventContent {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setTime(Date time){
+        this.time = time;
+    }
+
+    public Date getTime(){
+        return time;
+    }
+
+    public void setDate(Date date){
+        this.date = date;
+    }
+
+    public Date getDate(){
+        return date;
     }
 
 }

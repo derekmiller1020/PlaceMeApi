@@ -3,6 +3,7 @@ package placemio.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import placemio.deletion.DeleteEvent;
 import placemio.models.EventModel;
 import placemio.insertion.InsertEvent;
 import placemio.retrieve.RetrieveEvent;
@@ -10,7 +11,10 @@ import placemio.update.UpdateEvent;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class EventService {
@@ -68,6 +72,14 @@ public class EventService {
             update.update(eventId, getEvent().getAddress(), getEvent().getEventContent());
         } else {
             response.sendError(400, "You have sent over invalid data");
+        }
+    }
+
+    public void deleteEvent(Integer eventId, HttpServletResponse response) throws Exception{
+        if (eventId != null){
+            new DeleteEvent(eventId).deleteEvent();
+        } else {
+            response.sendError(400, "You have sent over an invalid id");
         }
     }
 

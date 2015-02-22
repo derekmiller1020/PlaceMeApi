@@ -33,7 +33,7 @@ public class InsertEvent {
      * is_deleted int(2)
      */
     private void insertEvent(){
-        final String sqlInsert = "INSERT INTO event(user_id, creation_date, event_date) VALUES (?, NOW(), NOW())";
+        final String sqlInsert = "INSERT INTO event(user_id, creation_date) VALUES (?, NOW())";
         JdbcTemplate db = DatabaseConnection.getDatabaseConnection();
         try {
             Object[] values = new Object[]{user.getUserId() };
@@ -80,17 +80,20 @@ public class InsertEvent {
      * title varchar(255),
      * type varchar(255),
      * age_group varchar(255),
+     * event_date,
+     * event_time
      * location_id int(11)
      */
     private void insertEventContent(){
         try{
-            final String sqlInsert = "INSERT INTO event_content (message, title, type, event_id) " +
-                    "VALUES (?,?,?,?)";
+            final String sqlInsert = "INSERT INTO event_content (message, title, type, event_id, event_date) " +
+                    "VALUES (?,?,?,?,?,?)";
             JdbcTemplate db = DatabaseConnection.getDatabaseConnection();
             Object[] values = new Object[]{
-                    eventContent.getMessage(), eventContent.getTitle(), eventContent.getType(), eventId
+                    eventContent.getMessage(), eventContent.getTitle(), eventContent.getType(), eventId, eventContent.getDate()
             };
             db.update(sqlInsert, values);
+            System.out.println("asdf");
         } catch (Exception e){
             System.out.println(e.toString());
         }

@@ -52,7 +52,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             return true;
         } else {
             String token = httpServletRequest.getHeader("Authorization");
-            return !(token == null || token.equals("")) && new Authenticator().checkToken(token);
+            return !(token == null || token.equals("")) && !new Authenticator().checkToken(token);
         }
     }
 }

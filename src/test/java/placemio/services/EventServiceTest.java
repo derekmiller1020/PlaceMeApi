@@ -29,7 +29,7 @@ public class EventServiceTest {
 
     private HttpServletResponse mockServletResponse;
     private MockHttpServletRequest mockServletRequest;
-    private List<EventModel> events = new ArrayList<EventModel>();
+    private List<EventModel> events = new ArrayList<>();
 
     @InjectMocks
     EventService eventService;

@@ -1,17 +1,19 @@
-package placemio.retrieve;
+package placemio.dao.retrieve;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
 import placemio.models.EventModel;
 import placemio.models.submodels.Address;
 import placemio.models.submodels.EventContent;
+import placemio.models.submodels.EventDetails;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class RetrieveEvent {
 
@@ -27,7 +29,7 @@ public class RetrieveEvent {
         return retrieveEvent(eventId);
     }
 
-    public EventModel getEventByType(String type){
+    public List<EventModel> getEventByType(String type){
         results = db.query(
                 "SELECT * from event e " +
                         "INNER JOIN event_address ea ON ea.event_id = e.id " +
@@ -40,7 +42,7 @@ public class RetrieveEvent {
                         return translateEventData(rs);
                     }
                 });
-        return results.isEmpty() ? null : results.get(0);
+        return results;
     }
 
     private List<EventModel> retrieveData(){
@@ -77,10 +79,10 @@ public class RetrieveEvent {
     private EventModel translateEventData(ResultSet rs) throws SQLException{
         EventModel eventModel = new EventModel();
         //set event details information
-        Map<String, Object> eventDetails = new HashMap<String, Object>();
-        eventDetails.put("user_id", rs.getInt("USER_ID"));
-        eventDetails.put("creation_date", rs.getDate("CREATION_DATE"));
-        eventDetails.put("event_id", rs.getInt("ID"));
+        EventDetails eventDetails = new EventDetails();
+        eventDetails.setUserId(rs.getInt("USER_ID"));
+        eventDetails.setCreationDate(rs.getDate("CREATION_DATE"));
+        eventDetails.setEventId(rs.getInt("ID"));
         eventModel.setEventDetails(eventDetails);
 
         //set address information
@@ -107,4 +109,5 @@ public class RetrieveEvent {
 
         return eventModel;
     }
+
 }

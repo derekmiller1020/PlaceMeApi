@@ -1,4 +1,4 @@
-package placemio;
+package placemio.config;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;

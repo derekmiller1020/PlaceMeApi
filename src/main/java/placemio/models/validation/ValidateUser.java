@@ -2,10 +2,8 @@ package placemio.models.validation;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 public class ValidateUser {

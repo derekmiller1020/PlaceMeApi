@@ -2,8 +2,8 @@ package placemio.services;
 
 import org.springframework.stereotype.Component;
 import placemio.models.UserModel;
-import placemio.insertion.InsertApiUser;
-import placemio.insertion.InsertUser;
+import placemio.dao.insertion.InsertApiUser;
+import placemio.dao.insertion.InsertUser;
 import placemio.models.validation.ValidateAuth;
 import placemio.models.validation.ValidateRegistration;
 import placemio.models.validation.ValidateUser;

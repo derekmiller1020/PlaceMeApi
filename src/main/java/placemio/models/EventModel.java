@@ -3,13 +3,15 @@ package placemio.models;
 
 import placemio.models.submodels.Address;
 import placemio.models.submodels.EventContent;
+import placemio.models.submodels.EventDetails;
+
 import java.util.Map;
 
 public class EventModel {
 
     private Address address;
     private EventContent eventContent;
-    private Map<String, Object> eventDetails;
+    private EventDetails eventDetails;
 
     public EventModel(){}
 
@@ -29,11 +31,11 @@ public class EventModel {
         return eventContent;
     }
 
-    public void setEventDetails(Map<String, Object> eventDetails){
+    public void setEventDetails(EventDetails eventDetails){
         this.eventDetails = eventDetails;
     }
 
-    public Map<String, Object> getEventDetails(){
+    public EventDetails getEventDetails(){
         return this.eventDetails;
     }
 

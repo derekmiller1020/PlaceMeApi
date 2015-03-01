@@ -2,7 +2,7 @@ package placemio.models.validation;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
 import java.util.List;
 import java.util.Map;
 

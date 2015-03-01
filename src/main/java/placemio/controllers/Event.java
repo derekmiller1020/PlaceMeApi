@@ -14,12 +14,10 @@ import java.util.List;
 
 
 @RestController
-
 public class Event {
 
     @Autowired
     EventService eventService;
-
 
     /**
      * Creates Event
@@ -78,7 +76,7 @@ public class Event {
     @LoginRequired
     public EventModel updateEvent(@PathVariable Integer eventId,
                                   @RequestBody EventModel eventModel,
-                                  HttpServletResponse response) throws Throwable{
+                                  HttpServletResponse response) throws Throwable {
         eventService.setEvent(eventModel);
         eventService.updateEvent(eventId, response);
         return eventService.retrieveEvent(eventId);
@@ -88,7 +86,7 @@ public class Event {
     @ResponseBody
     @AuthRequired
     @LoginRequired
-    public EventModel deleteEvent(@PathVariable Integer eventId, HttpServletResponse response, HttpServletRequest request) throws Throwable {
+    public EventModel deleteEvent(@PathVariable Integer eventId, HttpServletResponse response) throws Throwable {
         eventService.deleteEvent(eventId, response);
         return null; //temporary
     }

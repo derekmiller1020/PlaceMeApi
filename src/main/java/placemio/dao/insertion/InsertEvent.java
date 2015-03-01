@@ -1,8 +1,9 @@
-package placemio.insertion;
+package placemio.dao.insertion;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
+import placemio.models.EventModel;
 import placemio.models.UserModel;
 import placemio.models.submodels.Address;
 import placemio.models.submodels.EventContent;
@@ -14,10 +15,10 @@ public class InsertEvent {
     private EventContent eventContent;
     private Integer eventId;
 
-    public void insertContent(UserModel user, Address address, EventContent eventContent){
+    public void insertContent(UserModel user, EventModel eventModel){
         this.user = user;
-        this.address = address;
-        this.eventContent = eventContent;
+        this.address = eventModel.getAddress();
+        this.eventContent = eventModel.getEventContent();
 
         insertEvent();
         insertAddress();
@@ -87,13 +88,12 @@ public class InsertEvent {
     private void insertEventContent(){
         try{
             final String sqlInsert = "INSERT INTO event_content (message, title, type, event_id, event_date) " +
-                    "VALUES (?,?,?,?,?,?)";
+                    "VALUES (?,?,?,?,?)";
             JdbcTemplate db = DatabaseConnection.getDatabaseConnection();
             Object[] values = new Object[]{
                     eventContent.getMessage(), eventContent.getTitle(), eventContent.getType(), eventId, eventContent.getDate()
             };
             db.update(sqlInsert, values);
-            System.out.println("asdf");
         } catch (Exception e){
             System.out.println(e.toString());
         }

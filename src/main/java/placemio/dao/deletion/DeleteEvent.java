@@ -1,19 +1,14 @@
-package placemio.deletion;
+package placemio.dao.deletion;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
 
 public class DeleteEvent {
 
-    private Integer eventId;
     private JdbcTemplate db = DatabaseConnection.getDatabaseConnection();
 
-    public DeleteEvent(Integer eventId){
-        this.eventId = eventId;
-    }
-
-    public void deleteEvent(){
+    public void deleteEvent(Integer eventId){
         final String sqlInsert = "UPDATE event SET is_deleted = 1 WHERE id = ?";
         JdbcTemplate db = DatabaseConnection.getDatabaseConnection();
         try {

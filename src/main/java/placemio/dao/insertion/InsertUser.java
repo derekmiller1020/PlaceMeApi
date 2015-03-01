@@ -1,8 +1,8 @@
-package placemio.insertion;
+package placemio.dao.insertion;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
 
 public class InsertUser {
 

@@ -1,7 +1,8 @@
-package placemio.update;
+package placemio.dao.update;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import placemio.DatabaseConnection;
+import placemio.dao.DatabaseConnection;
+import placemio.models.EventModel;
 import placemio.models.submodels.Address;
 import placemio.models.submodels.EventContent;
 
@@ -11,34 +12,13 @@ public class UpdateEvent {
     private EventContent eventContent;
     private Integer eventId;
 
-    public void update(Integer eventId, Address address, EventContent eventContent){
+    public void update(Integer eventId, EventModel eventModel){
         this.eventId = eventId;
-        this.address = address;
-        this.eventContent = eventContent;
+        this.address = eventModel.getAddress();
+        this.eventContent = eventModel.getEventContent();
 
-        updateEvent();
         updateAddress();
         updateEventContent();
-    }
-
-    /**
-     * Event Table table structure
-     * id int(11) NOT NULL,
-     * user_id int(11),
-     * creation_date DATE,
-     * event_date DATE,
-     * is_deleted int(2)
-     */
-    private void updateEvent(){
-        final String sqlInsert = "UPDATE event SET creation_date = NOW(), event_date = NOW() WHERE id = ?";
-        JdbcTemplate db = DatabaseConnection.getDatabaseConnection();
-        try {
-            Object[] values = new Object[]{eventId};
-            db.update(sqlInsert, values);
-            eventId = db.queryForInt("SELECT max(ID) FROM Event"); //temporary
-        } catch (Exception e){
-            System.out.println(e.toString());
-        }
     }
 
     /**
@@ -94,7 +74,4 @@ public class UpdateEvent {
         }
     }
 
-    public Integer getEventId(){
-        return eventId;
-    }
 }
